@@ -1,0 +1,56 @@
+{
+  "variables": {
+    "version": "17.04",
+    "codename": "zesty",
+    "arch": "amd64",
+    "disk_size": "102400"
+  },
+  "builders": [
+    {
+      "vnc_bind_address": "0.0.0.0",
+      "type": "qemu",
+      "iso_url": "http://archive.ubuntu.com/ubuntu/dists/{{user `codename`}}/main/installer-{{user `arch`}}/current/images/netboot/mini.iso",
+      "iso_checksum_type": "none",
+      "output_directory": "ubuntu-{{user `version`}}-{{user `arch`}}",
+      "shutdown_command": "shutdown -P now",
+      "disk_size": "{{user `disk_size`}}",
+      "format": "qcow2",
+      "headless": true,
+      "accelerator": "kvm",
+      "http_directory": "http",
+      "http_port_min": 22300,
+      "http_port_max": 22399,
+      "ssh_host_port_min": 22200,
+      "ssh_host_port_max": 22299,
+      "vnc_port_min": 22400,
+      "vnc_port_max": 22499,
+      "ssh_username": "root",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "10000s",
+      "vm_name": "ubuntu-{{user `codename`}}-{{user `arch`}}",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<tab> net.ifnames=0 priority=critical auto=true hostname={{.Name}} url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "build/{{user `codename`}}-{{user `arch`}}.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vagrant.sh",
+        "scripts/update.sh",
+        "scripts/buildd.sh"
+      ]
+    }
+  ]
+}
