@@ -40,7 +40,8 @@
   "post-processors": [
     {
       "output": "build/{{user `codename`}}-{{user `arch`}}.box",
-      "type": "vagrant"
+      "type": "vagrant",
+      "vagrantfile_template": "include/Vagrantfile.in"
     }
   ],
   "provisioners": [
