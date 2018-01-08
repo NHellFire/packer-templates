@@ -49,9 +49,10 @@
     {
       "type": "shell",
       "scripts": [
+        "scripts/initial-setup.sh",
+        "scripts/buildd.sh",
         "scripts/vagrant.sh",
-        "scripts/update.sh",
-        "scripts/buildd.sh"
+        "scripts/cleanup.sh"
       ]
     }
   ]
