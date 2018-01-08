@@ -11,3 +11,7 @@ Default disk size is 10GB. Need more? Specify `-var disk_size=newsize`. Size is 
 Default logins are:
 * root/vagrant 
 * vagrant/vagrant with the vagrant insecure key.
+
+
+
+If using packer older than v1.1.2, you will need to set `iso_checksum_type` to `none` in ubuntu.json
