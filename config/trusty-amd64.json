@@ -1,5 +1,6 @@
 {
   "version": "14.04",
   "codename": "trusty",
-  "arch": "amd64"
+  "arch": "amd64",
+  "vagrantfile_template": "include/Vagrantfile.trusty.in"
 }

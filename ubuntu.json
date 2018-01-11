@@ -3,7 +3,8 @@
     "version": "17.04",
     "codename": "zesty",
     "arch": "amd64",
-    "disk_size": "40960"
+    "disk_size": "40960",
+    "vagrantfile_template": "include/Vagrantfile.in"
   },
   "builders": [
     {
@@ -42,7 +43,7 @@
     {
       "output": "output/{{user `codename`}}-{{user `arch`}}.box",
       "type": "vagrant",
-      "vagrantfile_template": "include/Vagrantfile.in"
+      "vagrantfile_template": "{{user `vagrantfile_template`}}"
     }
   ],
   "provisioners": [
